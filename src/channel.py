@@ -46,12 +46,6 @@ class Channel:
         request = youtube.channels().list(part="snippet,contentDetails", id=self.channel_id)
         response = request.execute()
 
-        with open(file_name, 'a') as file:
-            if os.stat(file_name).st_size == 0:
-                json.dump([response], file)
-            else:
-                with open(file_name) as j_file:
-                    data_lst = json.load(j_file)
-                data_lst.append(response)
-                with open(file_name, 'w') as new_file:
-                    json.dump(data_lst, new_file)
+        with open(file_name, 'w') as file:
+            json.dump([response], file)
+
